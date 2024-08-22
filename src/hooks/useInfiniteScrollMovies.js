@@ -10,7 +10,7 @@ const useInfiniteScrollMovies = (searchQuery) => {
 
   const loadMoreMovies = () => {
     if (searchQuery) {
-      if (`{ENDPOINT_SEARCH}&query=${searchQuery}&page=${movies.page}` === previousSearch.current) return;
+      if (`${ENDPOINT_SEARCH}&query=${searchQuery}&page=${movies.page}` === previousSearch.current) return;
       previousSearch.current = `${ENDPOINT_SEARCH}&query=${searchQuery}&page=${movies.page}`;
       dispatch(fetchMovies({ apiUrl: `${ENDPOINT_SEARCH}&query=${searchQuery}`, page: movies.page + 1 }));
     } else {

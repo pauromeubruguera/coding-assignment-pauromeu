@@ -10,9 +10,10 @@ const useSearchMovies = (setSearchParams) => {
     const { movies } = useSelector((state) => state);
     const previousSearch = useRef(null);
     const getSearchResults = (query) => {
-        console.log()
         dispatch(clearMovies());
         if (query !== '') {
+            if (`${ENDPOINT_SEARCH}&query=${query}&page=${movies.page}` === previousSearch.current) return
+            previousSearch.current = `${ENDPOINT_SEARCH}&query=${query}&page=${movies.page}`
             dispatch(fetchMovies({ apiUrl: `${ENDPOINT_SEARCH}&query=${query}`, page: 1 }));
             setSearchParams(createSearchParams({ search: query }));
         } else {
