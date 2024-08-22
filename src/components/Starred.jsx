@@ -4,31 +4,32 @@ import starredSlice from '../data/starredSlice'
 import Movie from './Movie'
 import '../styles/starred.scss'
 
-const Starred = ({viewTrailer}) => {
+const Starred = ({ viewTrailer }) => {
 
-    const state = useSelector((state) => state)
-    const { starred } = state
-    const { clearAllStarred } = starredSlice.actions
-    const dispatch = useDispatch()
+  const state = useSelector((state) => state)
+  const { starred } = state
+  const { clearAllStarred } = starredSlice.actions
+  const dispatch = useDispatch()
 
   return (
     <div className="starred" data-testid="starred">
-      {starred.starredMovies.length > 0 && (<div data-testid="starred-movies" className="starred-movies">
-        <h6 className="header">Starred movies</h6>
-        <div className="row">
-        {starred.starredMovies.map((movie) => (
-          <Movie 
-            movie={movie} 
-            key={movie.id}
-            viewTrailer={viewTrailer}
-          />
-        ))}
-        </div>
-
-        <footer className="text-center">
-          <button className="btn btn-primary" onClick={() => dispatch(clearAllStarred())}>Remove all starred</button>
-        </footer>
-      </div>)}
+      {starred.starredMovies.length > 0 && (
+        <>
+          <h6 className="header">Starred movies</h6>
+          <div data-testid="starred-movies" className="starred-movies">
+            {starred.starredMovies.map((movie) => (
+              <Movie
+                movie={movie}
+                key={movie.id}
+                viewTrailer={viewTrailer}
+              />
+            ))}
+          </div>
+          <footer className="text-center">
+            <button className="btn btn-primary" onClick={() => dispatch(clearAllStarred())}>Remove all starred</button>
+          </footer>
+        </>
+      )}
 
       {starred.starredMovies.length === 0 && (<div className="text-center empty-cart">
         <i className="bi bi-star" />
